@@ -55,8 +55,7 @@
 
 % footer: talk tag (left) + slide number (right) in muted slate
 \setbeamertemplate{footline}{%
-  \hbox to \paperwidth{\hspace*{0.6cm}%
-    \textcolor{muted}{\footnotesize The Scorecard Illusion}\hfill
+  \hbox to \paperwidth{\hspace*{0.6cm}\hfill
     \textcolor{muted}{\footnotesize\insertframenumber}\hspace*{0.6cm}}%
   \vspace*{0.14cm}}
 
@@ -128,7 +127,7 @@
   % +max DPD (up, coral)
   \fill[coral] (1.35,1.6) rectangle (2.25,3.1);
   \draw[ink,dashed,opacity=0.4] (1.05,1.6)--(1.35,1.6);
-  \node[text=ink,anchor=south] at (1.8,3.12){\scriptsize +DPD};
+  \node[text=ink,anchor=south] at (1.8,3.12){\scriptsize +delay};
   % +overdue (up, coral)
   \fill[coral] (2.55,3.1) rectangle (3.45,3.7);
   \draw[ink,dashed,opacity=0.4] (2.25,3.1)--(2.55,3.1);
@@ -165,8 +164,8 @@
 \begin{tikzpicture}[font=\scriptsize]
   % Monday
   \foreach \i/\h in {0/1.2,1/0.7,2/1.5,3/0.5,4/0.9}{
-     \fill[sky] ({\i*0.34},0) rectangle ({\i*0.34+0.24},\h);}
-  \node[text=sky,anchor=south] at (0.7,1.7){Mon};
+     \fill[muted] ({\i*0.34},0) rectangle ({\i*0.34+0.24},\h);}
+  \node[text=muted,anchor=south] at (0.7,1.7){Mon};
   % Tuesday (only feature 2 truly changed, yet all shift)
   \begin{scope}[xshift=2.6cm]
    \foreach \i/\h in {0/0.9,1/1.0,2/2.0,3/0.7,4/0.6}{
@@ -185,11 +184,11 @@
   % bars: name / width / colour
   \foreach \i/\name/\w/\c in {
      0/{age}/3.2/gold,
-     1/{max DPD 3m}/1.4/coral,
-     2/{max DPD 6m}/1.3/coral,
-     3/{max DPD 12m}/1.1/coral,
-     4/{overdue max}/1.0/coral,
-     5/{overdue avg}/0.8/coral}{
+     1/{max delay 3m}/1.4/muted,
+     2/{max delay 6m}/1.3/muted,
+     3/{max delay 12m}/1.1/muted,
+     4/{overdue max}/1.0/muted,
+     5/{overdue avg}/0.8/muted}{
        \pgfmathsetmacro\yy{2.5-\i*0.42}
        \fill[\c] (0,\yy) rectangle (\w,\yy+0.3);
        \node[text=ink,anchor=west,font=\tiny] at (\w+0.1,\yy+0.15){\name};
@@ -319,30 +318,30 @@
 \begin{tikzpicture}[font=\tiny]
   % ----- ungrouped -----
   \node[text=muted,anchor=south] at (0.85,2.05){ungrouped};
-  \fill[gold] (0,1.35) rectangle (1.3,1.57);
-  \node[text=gold,anchor=west] at (1.35,1.46){age};
+  \fill[muted] (0,1.35) rectangle (1.3,1.57);
+  \node[text=muted,anchor=west] at (1.35,1.46){age};
   \foreach \i/\w in {0/0.6,1/0.5,2/0.45,3/0.35}{
      \pgfmathsetmacro\yy{1.0-\i*0.30}
-     \fill[coral] (0,\yy) rectangle (\w,\yy+0.22);}
-  \node[text=coral,anchor=west] at (0.7,-0.18){DPD family, split}; 
+     \fill[gold] (0,\yy) rectangle (\w,\yy+0.22);}
+  \node[text=gold,anchor=west] at (0.7,-0.18){delay family, split};
   % arrow
-  \draw[gold,->,>=stealth,line width=1pt] (2.55,0.9) -- (3.25,0.9);
-  \node[text=gold,anchor=south,font=\tiny] at (2.9,0.95){group};
+  \draw[muted,->,>=stealth,line width=1pt] (2.55,0.9) -- (3.25,0.9);
+  \node[text=muted,anchor=south,font=\tiny] at (2.9,0.95){group};
   % ----- grouped -----
   \begin{scope}[xshift=3.6cm]
    \node[text=muted,anchor=south] at (0.9,2.05){grouped};
-   \node[text=coral,anchor=south,font=\tiny] at (0.85,1.62){delinquency};
-   \fill[coral] (0,1.35) rectangle (1.7,1.57);
-   \fill[gold] (0,1.0) rectangle (0.9,1.22);
-   \node[text=gold,anchor=west] at (0.95,1.11){age};
+   \node[text=gold,anchor=south,font=\tiny] at (0.85,1.62){delinquency};
+   \fill[gold] (0,1.35) rectangle (1.7,1.57);
+   \fill[muted] (0,1.0) rectangle (0.9,1.22);
+   \node[text=muted,anchor=west] at (0.95,1.11){age};
   \end{scope}
 \end{tikzpicture}}
 
 % Slide: correlation makes SHAP sample feature combinations that never occur
 \newcommand{\unrealviz}{%
 \begin{tikzpicture}[font=\tiny]
-  \draw[muted,->,>=stealth] (0,0)--(3.0,0) node[anchor=north,text=muted,font=\tiny]{DPD 3m};
-  \draw[muted,->,>=stealth] (0,0)--(0,2.6) node[anchor=south,text=muted,font=\tiny]{DPD 6m};
+  \draw[muted,->,>=stealth] (0,0)--(3.0,0) node[anchor=north,text=muted,font=\tiny]{delay 3m};
+  \draw[muted,->,>=stealth] (0,0)--(0,2.6) node[anchor=south,text=muted,font=\tiny]{delay 6m};
   % realistic, correlated cloud along the diagonal
   \draw[mint,opacity=0.18,line width=11pt] (0.35,0.3) -- (2.25,2.15);
   \foreach \x/\y in {0.4/0.3,0.7/0.6,1.0/0.85,1.3/1.1,1.6/1.4,1.9/1.7,2.2/2.0}{
@@ -352,6 +351,30 @@
   \foreach \x/\y in {2.55/0.35,0.4/2.05}{\fill[coral] (\x,\y) circle (2.2pt);}
   \node[text=coral,anchor=west,font=\tiny,align=left] at (0.65,2.25)
        {sampled by SHAP,\\ never occurs};
+\end{tikzpicture}}
+
+% Face 2 remedy: a rare feature is low on mean |SHAP| but high on max |SHAP|
+\newcommand{\meanmaximp}{%
+\begin{tikzpicture}[font=\tiny]
+  % mean |SHAP|
+  \node[text=muted,anchor=south] at (0.9,1.95){mean $|$SHAP$|$};
+  \fill[muted] (0,1.55) rectangle (1.7,1.75);
+  \fill[muted] (0,1.25) rectangle (1.3,1.45);
+  \fill[muted] (0,0.95) rectangle (1.0,1.15);
+  \fill[gold]  (0,0.65) rectangle (0.3,0.85);
+  \node[text=gold,anchor=west] at (0.35,0.75){phone-reuse};
+  % arrow
+  \draw[mint,->,>=stealth,line width=1pt] (3.05,1.2)--(3.95,1.2);
+  \node[text=mint,anchor=south,font=\tiny] at (3.5,1.25){look at max};
+  % max |SHAP|
+  \begin{scope}[xshift=4.35cm]
+   \node[text=muted,anchor=south] at (0.9,1.95){max $|$SHAP$|$};
+   \fill[gold]  (0,1.55) rectangle (1.8,1.75);
+   \node[text=gold,anchor=west] at (1.85,1.65){phone-reuse};
+   \fill[muted] (0,1.25) rectangle (0.9,1.45);
+   \fill[muted] (0,0.95) rectangle (0.7,1.15);
+   \fill[muted] (0,0.65) rectangle (0.5,0.85);
+  \end{scope}
 \end{tikzpicture}}
 
 % full-bleed dark divider for each pitfall
@@ -416,14 +439,15 @@ SHAP --- a tool you all love --- and how it can fool you. Light, smile, move on.
 \large
 \textbf{Probability of default} --- will this customer stop repaying within the next
 12 months? It's fed by the customer's behavioural and credit history: delinquency
-record, max DPD, overdue amounts, utilization, age.\\[14pt]
+record, max delay (worst payment delay in a look-back window), overdue amounts,
+utilization, age.\\[14pt]
 \begin{columns}[c]
 \column{0.46\textwidth}
   \textcolor{muted}{\bfseries Logistic scorecard}\\
   \normalsize Readable, regulator-friendly --- \textcolor{coral}{but loses on
   performance.}\\[12pt]
   \textcolor{mint}{\bfseries XGBoost / LightGBM}\\
-  \normalsize Higher Gini, catches hidden risk --- \textcolor{coral}{but it's a
+  \normalsize Higher predictive power, catches hidden risk --- \textcolor{coral}{but it's a
   black box.}
 \column{0.5\textwidth}
   \centering\blackboxviz
@@ -432,7 +456,7 @@ record, max DPD, overdue amounts, utilization, age.\\[14pt]
 \end{frame}
 
 % ---------- 4. WHY EXPLANATIONS ------------------------------------
-\begin{frame}{Why we even need to explain it}
+\begin{frame}{Why do we even need to explain it}
 \large
 Hundreds of trees voting. Nobody reads that off the cuff. Yet we \emph{must}
 say why a customer was declined --- for three audiences:\\[14pt]
@@ -554,7 +578,7 @@ They fall out of the ``safe'' interaction. PD doesn't improve --- sometimes it g
 \end{warnbox}
 \end{frame}
 
-\begin{frame}{The remedy --- and a hard result}
+\begin{frame}{The remedy}
 \large
 There is hard, peer-reviewed proof that complete-and-linear attribution methods
 (SHAP included) can do \textbf{no better than a coin flip} on tasks like
@@ -562,8 +586,8 @@ algorithmic recourse.\\[12pt]
 For ``what should the customer change,'' use \textbf{counterfactual explanations}
 --- they \emph{simulate} the model to find the smallest decision-flipping change.
 \begin{rulebox}
-SHAP $=$ ``why this prediction, vs.\ the background.''\quad
-Not $=$ ``what to do to change it.''
+SHAP tells you \textbf{why} the model gave this score. It does \emph{not} tell you
+\textbf{what to change} to get a different one --- for that, use counterfactuals.
 \end{rulebox}
 \srcline{Bilodeau et al., \emph{PNAS} 2024 (impossibility theorems) · Albini et al., \emph{FAccT} 2022 (Counterfactual SHAP).}
 \end{frame}
@@ -599,10 +623,11 @@ Monday: PD $=3\%$. \quad Tuesday: PD $=4\%$. \quad The prediction moved.\\[8pt]
   moved'' when one thing changed.
 \column{0.5\textwidth}
   \textcolor{coral}{\bfseries 2 · Background}\\[4pt]
-  SHAP values depend on the reference set. Different/ drifted background $\to$
-  different SHAP, even with identical inputs.
+  SHAP is always measured against a \emph{reference set} of customers --- the base
+  value on that waterfall \emph{is} this background. Swap it or let it drift and
+  every SHAP moves, even with identical inputs.
 \end{columns}
-\vspace{16pt}
+\vspace{12pt}
 \begin{warnbox}
 Engineering trap: \texttt{TreeExplainer} with no background \textbf{silently} picks
 \emph{path-dependent} over \emph{interventional}. Different numbers --- and you may
@@ -636,7 +661,7 @@ moved too, and read the two together.
 \large
 \begin{columns}[c]
 \column{0.5\textwidth}
-A \textbf{family} of features for one phenomenon: max DPD at 3/6/9/12 months,
+A \textbf{family} of features for one phenomenon: max delay at 3/6/9/12 months,
 overdue now / max / average.\\[6pt]
 Next to it, one \textbf{lonely} feature: \emph{age}.\\[10pt]
 \textcolor{muted}{\normalsize The delinquency contribution splits across five bars;
@@ -657,7 +682,7 @@ Age can top the ranking --- not because it matters most, but because it has
 \begin{columns}[c]
 \column{0.52\textwidth}
 With strong correlation, SHAP samples feature \textbf{combinations that don't
-exist} --- max DPD $=90$ in one window, $0$ in the next --- and scores the model on
+exist} --- max delay $=90$ days in one window, $0$ in the next --- and scores the model on
 those \emph{unrealistic} points.
 \column{0.46\textwidth}
 \centering\unrealviz
@@ -669,12 +694,37 @@ So part of the attribution is built on data the model will never actually see.
 \srcline{Correlated features \& unrealistic samples: Aas, Jullum \& Løland, \emph{Artificial Intelligence} 298:103502 (2021).}
 \end{frame}
 
+\begin{frame}{Face 1 --- why: SHAP builds rows that can't exist}
+\large
+Two correlated features --- \textbf{max delay over 3m} and \textbf{over 6m} ---
+where by construction $6\text{m}\ge 3\text{m}$. To score ``delay 3m'' alone, SHAP
+keeps it and draws ``delay 6m'' from the background:
+\vspace{8pt}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\begin{rulebox}
+\textbf{Real customer}\\[4pt]
+delay 3m $=90$,\ \ delay 6m $=95$\\[4pt]
+{\normalsize\textcolor{mint}{\ding{51}}\ plausible}
+\end{rulebox}
+\column{0.5\textwidth}
+\begin{warnbox}
+\textbf{Row SHAP scores}\\[4pt]
+delay 3m $=90$,\ \ delay 6m $=0$\\[4pt]
+{\normalsize\textcolor{coral}{\ding{55}}\ impossible ($6\text{m}<3\text{m}$)}
+\end{warnbox}
+\end{columns}
+\vspace{12pt}
+\centering\textcolor{ink}{The model is queried on that impossible row --- and what
+it predicts there leaks into the explanation.}
+\end{frame}
+
 \begin{frame}{Face 1 --- the remedy}
 \large
 \begin{columns}[c]
 \column{0.5\textwidth}
 \textbf{Group correlated features.} Group SHAP values can be summed --- so compare
-the \emph{delinquency phenomenon} against age, not one-of-five-DPD against age.
+the \emph{delinquency phenomenon} against age, not one-of-five delay features against age.
 \column{0.48\textwidth}
 \centering\groupedimp
 \end{columns}
@@ -687,24 +737,41 @@ reflects the model, not the feature layout.
 
 \begin{frame}{Face 2 --- importance is computed on \emph{today's} data}
 \large
-Take a fraud-\emph{correlated} signal --- e.g.\ \textbf{\# applications sharing one
-phone number across different PESELs}. In training it's almost always zero, so it
-ranks among the \textbf{least important} features.\\[2pt]
+Take a normally-quiet signal --- e.g.\ \textbf{\# applications sharing one phone
+number across different PESELs}. In training it's almost always zero, so by mean
+$|$SHAP$|$ it ranks among the \textbf{least important} features.\\[2pt]
 \begin{columns}[c]
 \column{0.56\textwidth}
   \centering
-  \stat{99.5\%}{zeros in training}\hspace{0.4cm}%
-  {\fontsize{26}{26}\selectfont\textcolor{muted}{$\Longrightarrow$}}\hspace{0.4cm}%
-  \stat{10\%}{elevated under attack}
+  \setlength{\tabcolsep}{0.3cm}%
+  \begin{tabular}{ccc}
+    {\fontsize{34}{38}\selectfont\bfseries\textcolor{gold}{99.5\%}} &
+    \raisebox{7pt}{\fontsize{30}{30}\selectfont\textcolor{muted}{$\Longrightarrow$}} &
+    {\fontsize{34}{38}\selectfont\bfseries\textcolor{gold}{90\%}} \\[3pt]
+    {\small\textcolor{muted}{zeros in training}} & &
+    {\small\textcolor{muted}{zeros in production}}
+  \end{tabular}
 \column{0.42\textwidth}
   \centering\histshift
 \end{columns}
 \vspace{2pt}
 \begin{warnbox}
-The trap isn't dropping it --- it's \textbf{not watching it.} ``Bottom of the
-ranking, who cares.'' Then a fraud ring hits, the signal lights up and becomes one
-of the strongest drivers --- but nobody was monitoring it.
+Then operators start \textbf{recycling} phone numbers --- the same number
+legitimately reappears across people. The feature quietly goes from 99.5\% to 90\%
+zeros and turns into a real driver --- but it sat at the bottom of the ranking, so
+nobody was watching.
 \end{warnbox}
+\end{frame}
+
+\begin{frame}{Face 2 --- the remedy}
+\large
+A rare feature can be \emph{weak on average but decisive when it fires}: low mean
+$|$SHAP$|$, high \textbf{maximum} $|$SHAP$|$.\\[4pt]
+\begin{center}\meanmaximp\end{center}
+\begin{rulebox}
+Rank and monitor features by the \textbf{max} (or the tail) of $|$SHAP$|$, not only
+the mean --- that's where rare-but-powerful drivers hide.
+\end{rulebox}
 \end{frame}
 
 \begin{frame}{A distinction to carry}
@@ -721,8 +788,8 @@ of the strongest drivers --- but nobody was monitoring it.
 \end{columns}
 \vspace{14pt}
 \begin{rulebox}
-Not a bug --- two different definitions. First decide \emph{what importance is for},
-then pick the method.
+Two definitions, not a bug --- so decide what you need importance \emph{for}, then
+pick the method.
 \end{rulebox}
 \srcline{Problems with Shapley as importance: Kumar et al., ICML 2020 · ``Many Shapley values'': Sundararajan \& Najmi, ICML 2020.}
 \end{frame}
@@ -808,7 +875,7 @@ exact shape per feature.
 \stat{0.981}{XGBoost}
 \end{center}
 \begin{rulebox}
-\textbf{Competitive}, not ``better'' --- trade one Gini point for full transparency.
+\textbf{Competitive}, not ``better'' --- trade one AUROC point for full transparency.
 \end{rulebox}
 \srcline{EBM benchmark (default params): Nori et al., ``InterpretML'', arXiv:1909.09223 · Rudin, \emph{NMI} 2019.}
 \end{frame}
@@ -817,14 +884,15 @@ exact shape per feature.
 \begin{frame}[plain]
 \begin{tikzpicture}[remember picture,overlay]
   \fill[nightbg] (current page.south west) rectangle (current page.north east);
-  \foreach \x/\h/\c in {7.0/1.6/coral, 7.9/2.6/coral, 8.8/1.1/mint, 9.7/2.9/mint, 10.6/1.8/gold}{
-     \fill[\c, opacity=0.16] ($(current page.south west)+(\x,1.0)$) rectangle ++(0.55,\h);}
-  \node[anchor=north west, text=ink, align=left] at ($(current page.west)+(1.0,2.7)$)
-       {\fontsize{36}{44}\selectfont\bfseries\begin{minipage}{11.5cm}\raggedright
+  % bar motif tucked into the bottom-right corner, clear of the text
+  \foreach \x/\h/\c in {13.0/1.8/coral, 13.6/2.9/coral, 14.2/1.2/mint, 14.8/3.3/mint, 15.4/2.0/gold}{
+     \fill[\c, opacity=0.18] ($(current page.south west)+(\x,0.55)$) rectangle ++(0.45,\h);}
+  \node[anchor=north west, text=ink, align=left] at ($(current page.west)+(1.0,3.05)$)
+       {\fontsize{36}{44}\selectfont\bfseries\begin{minipage}{13cm}\raggedright
         Love SHAP.\\ Ask only what it answers.\end{minipage}};
-  \node[anchor=west, text=gold, align=left] at ($(current page.west)+(1.1,-1.7)$)
-       {\Large When the stakes are high --- consider a glass box.};
-  \node[anchor=west, text=muted] at ($(current page.west)+(1.12,-3.0)$)
+  \node[anchor=west, text=gold, align=left] at ($(current page.west)+(1.1,-2.45)$)
+       {\Large\begin{minipage}{11cm}\raggedright When the stakes are high --- consider a glass box.\end{minipage}};
+  \node[anchor=west, text=muted] at ($(current page.west)+(1.12,-3.6)$)
        {\large Thank you.\, Questions?};
 \end{tikzpicture}
 \end{frame}
@@ -854,6 +922,15 @@ Slack et al. --- Fooling LIME and SHAP. \emph{AIES} 2020.\\
 Nori, Jenkins, Koch, Caruana --- InterpretML. arXiv:1909.09223.\\
 Rudin --- Stop explaining black box models\dots \emph{Nat.\ Mach.\ Intell.}\ 2019.
 \end{columns}
+\end{frame}
+
+% ---------- QR: GET THE SLIDES --------------------------------------
+\begin{frame}[c]{}
+\centering
+{\Large\textcolor{ink}{\bfseries Slides \& references}}\\[14pt]
+\colorbox{white}{\hspace{4pt}\raisebox{-4pt}{\includegraphics[height=4.1cm]{qr_slides}}\hspace{4pt}}\\[12pt]
+{\small\textcolor{gold}{github.com/wlazlod/conference-talks}}\\[3pt]
+{\footnotesize\textcolor{muted}{The Scorecard Illusion --- DSS AI Edition 2026}}
 \end{frame}
 
 \end{document}
