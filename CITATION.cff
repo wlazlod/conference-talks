@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you reference these talks, please cite the repository as below, or use the per-talk BibTeX entries in the README."
+title: "Conference talks by Daniel Wlazło"
+type: dataset
+authors:
+  - family-names: "Wlazło"
+    given-names: "Daniel"
+    email: "wlazlo.daniel@gmail.com"
+    orcid: "https://orcid.org/0009-0003-1984-8183"
+repository-code: "https://github.com/wlazlod/conference-talks"
+url: "https://datadeer.pl/"
+keywords:
+  - explainable AI
+  - SHAP
+  - credit risk
+  - knowledge graphs
+  - semantic ontologies
