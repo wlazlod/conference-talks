@@ -5,6 +5,7 @@ Repository of conference presentations
 
 | Date | Talk | Event | Materials |
 |---|---|---|---|
+| 2026-10-28 | Odpowiedzialne AI w scoringu kredytowym: lekcje dla każdego, kto pozwala algorytmom decydować o ludziach | Polski Kongres AI, Łódź | [slides](2026-10-28-PKAI/odpowiedzialne-ai-w-scoringu-kredytowym.pdf) |
 | 2026-06-18 | The Scorecard Illusion: Why SHAP values are not points (and how they can fool you) | Data Science Summit, AI Edition, Warsaw | [slides](2026-06-18-DSS-AI/the-scorecard-illusion.pdf) · [write-up](https://datadeer.pl/notes/shap-values-are-not-points.html) |
 | 2026 | Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML (with Kamil Golis) | GHOST Day, Poznań | — |
 | 2025 | Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML | Data Science Summit, Warsaw | — |
@@ -14,6 +15,17 @@ Repository of conference presentations
 See [`CITATION.cff`](CITATION.cff) for the repository as a whole, or cite an individual talk:
 
 ```bibtex
+@misc{wlazlo2026odpowiedzialne,
+  author       = {Wlaz{\l}o, Daniel},
+  title        = {Odpowiedzialne {AI} w scoringu kredytowym: lekcje dla
+                  ka{\.z}dego, kto pozwala algorytmom decydowa{\'c} o ludziach},
+  year         = {2026},
+  month        = oct,
+  howpublished = {Talk at Polski Kongres {AI}, {\L}{\'o}d{\'z}, Poland},
+  note         = {In Polish},
+  url          = {https://github.com/wlazlod/conference-talks}
+}
+
 @misc{wlazlo2026scorecard,
   author       = {Wlaz{\l}o, Daniel},
   title        = {The Scorecard Illusion: Why {SHAP} Values Are Not Points
